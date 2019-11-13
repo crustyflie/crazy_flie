@@ -12,10 +12,9 @@ pub type LD4 = PC3<Output<OpenDrain>>;
 
 /// User LED colors
 pub enum LedColor {
-    /// Green LED
     Green,
-    /// Red LED / LD5
     Red,
+    Blue,
 }
 
 // Array of the on-board user LEDs
@@ -102,20 +101,20 @@ ctor!(LD1, LD2, LD3, LD4);
 impl Led {
     /// Turns the LED off
     pub fn off(&mut self) {
-        self.pin.set_low();
+        let _ = self.pin.set_low();
     }
 
     /// Turns the LED on
     pub fn on(&mut self) {
-        self.pin.set_high();
+        let _ = self.pin.set_high();
     }
 
     /// Toggles the LED
     pub fn toggle(&mut self) {
-        if self.pin.is_low() {
-            self.pin.set_high();
+        if self.pin.is_low().unwrap() {
+            let _ = self.pin.set_high();
         } else {
-            self.pin.set_low();
+            let _ = self.pin.set_low();
         }
     }
 }

@@ -11,10 +11,11 @@ pub type LD3 = PC2<Output<OpenDrain>>;
 pub type LD4 = PC3<Output<OpenDrain>>;
 
 /// User LED colors
-pub enum LedColor {
-    Green,
-    Red,
-    Blue,
+pub enum LedName {
+    left_red,
+    left_green,
+    right_green,
+    right_red,
 }
 
 // Array of the on-board user LEDs
@@ -57,10 +58,10 @@ impl core::ops::Index<usize> for Leds {
     }
 }
 
-impl core::ops::Index<LedColor> for Leds {
+impl core::ops::Index<LedName> for Leds {
     type Output = Led;
 
-    fn index(&self, c: LedColor) -> &Led {
+    fn index(&self, c: LedName) -> &Led {
         &self.leds[c as usize]
     }
 }
@@ -71,8 +72,8 @@ impl core::ops::IndexMut<usize> for Leds {
     }
 }
 
-impl core::ops::IndexMut<LedColor> for Leds {
-    fn index_mut(&mut self, c: LedColor) -> &mut Led {
+impl core::ops::IndexMut<LedName> for Leds {
+    fn index_mut(&mut self, c: LedName) -> &mut Led {
         &mut self.leds[c as usize]
     }
 }
